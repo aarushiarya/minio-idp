@@ -6,7 +6,7 @@ To authenticate applications using OpenID Connect register your application with
 ## Example  
 ### Add application to Keycloak
 
-1. Download and install keycloak https://www.keycloak.org/docs/latest/getting_started/index.html
+1. Download and install [keycloak](https://www.keycloak.org/docs/latest/getting_started/index.html)
 2. Follow the instructions to make your admin console. Then create a realm, add you application in Clients. 
 3. Under Clients, go to settings, select Access type as Confidential. Save the changes.
 4. Go to Credentials on top, configure this Client Id and Client Secret in your application to request access token from Idp(Keycloak).
