@@ -11,7 +11,7 @@ To authenticate applications using OpenID Connect register your application with
 3. Under Clients, go to settings, select Access type as Confidential. Save the changes.
 4. Go to Credentials on top, configure this Client Id and Client Secret in your application to request access token from Idp(Keycloak).
 
-![image](https://user-images.githubusercontent.com/22103395/41311551-6ce39d44-6e39-11e8-89c8-9c8686e58bdb.png)
+![image](https://user-images.githubusercontent.com/22103395/41383266-b4ba3e34-6f24-11e8-8ce9-2e783c97ef20.png)
 
 ### Login to Minio 
 Login with Minio using access token and Idp (Keycloak).
