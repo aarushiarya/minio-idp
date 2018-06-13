@@ -3,7 +3,7 @@
 
 To authenticate applications using OpenID Connect register your application with the Identity Provider(Keycloak), add host to minio server using access_token and Idp.
 
-## Example  
+## Example 1
 ### Add application to Keycloak
 
 1. Download and install [keycloak](https://www.keycloak.org/docs/latest/getting_started/index.html)
@@ -26,4 +26,10 @@ Minio server verifies access_token and if successful, returns temporary access k
 
 Client application can use Minio resources.
 
+## Example 2
+### Add application to wso2
+
+1. Download and install [wso2](https://docs.wso2.com/display/IS530/Installation+Guide)
+2. Register your application on the [management console](https://docs.wso2.com/display/IS530/Getting+Started+with+the+Management+Console)
+3. Follow this [tutorial](https://docs.wso2.com/display/IS530/Setting+Up+the+Sample+Webapp) to setup your first application.
 
