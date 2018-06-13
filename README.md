@@ -36,3 +36,4 @@ Client application can use Minio resources.
 5. Minio sends request to [OAuth Introspection Endpoint](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint) to verify the access token is valid.
 6. If valid, Minio sends temporary credentials.
 
+![image](https://user-images.githubusercontent.com/22103395/41383172-3f211364-6f24-11e8-9500-c839820dbdfd.png)
