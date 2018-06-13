@@ -33,3 +33,8 @@ Client application can use Minio resources.
 2. Register your application on the [management console](https://docs.wso2.com/display/IS530/Getting+Started+with+the+Management+Console)
 3. Follow this [tutorial](https://docs.wso2.com/display/IS530/Setting+Up+the+Sample+Webapp) to setup your first application.
 
+![image](https://user-images.githubusercontent.com/22103395/41369785-b60d2b04-6efa-11e8-8d89-fe76d395ccaf.png)
+
+4. Add user to get access token.
+
+
