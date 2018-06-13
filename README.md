@@ -17,7 +17,7 @@ To authenticate applications using OpenID Connect register your application with
 Login with Minio using access token and Idp (Keycloak).
 
 ```
-add new host access_token Idp
+mc host add access_token Idp
 ```
 
 ### Minio using public key from Idp to verify access_token
@@ -32,8 +32,14 @@ Client application can use Minio resources.
 1. Download and install [wso2](https://docs.wso2.com/display/IS530/Installation+Guide)
 2. Register your application on the [management console](https://docs.wso2.com/display/IS530/Getting+Started+with+the+Management+Console)
 3. Follow this [tutorial](https://docs.wso2.com/display/IS530/Setting+Up+the+Sample+Webapp) to setup your first application.
-4. Add user to get access token. Pass this access token to the resource server, Minio.
-5. Minio sends request to [OAuth Introspection Endpoint](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint) to verify the access token is valid.
-6. If valid, Minio sends temporary credentials.
+4. Add user to get access token. 
+5. Pass this access token to Minio using the following command
+
+```
+mc host add access_token Idp
+```
+
+6. Minio sends request to [OAuth Introspection Endpoint](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint) to verify the access token is valid.
+7. If valid, Minio sends temporary credentials.
 
 ![image](https://user-images.githubusercontent.com/22103395/41383172-3f211364-6f24-11e8-9500-c839820dbdfd.png)
