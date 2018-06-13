@@ -32,6 +32,7 @@ Client application can use Minio resources.
 1. Download and install [wso2](https://docs.wso2.com/display/IS530/Installation+Guide)
 2. Register your application on the [management console](https://docs.wso2.com/display/IS530/Getting+Started+with+the+Management+Console)
 3. Follow this [tutorial](https://docs.wso2.com/display/IS530/Setting+Up+the+Sample+Webapp) to setup your first application.
-4. Add user to get access token.
-
+4. Add user to get access token. Pass this access token to the resource server, Minio.
+5. Minio sends request to [OAuth Introspection Endpoint](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint) to verify the access token is valid.
+6. If valid, Minio sends temporary credentials.
 
