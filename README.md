@@ -12,7 +12,7 @@ To authenticate applications using OpenID Connect register your application with
 curl -v -X POST -H "Authorization: Basic <base64 encoded client id:client secret value>" -k -d "grant_type=client_credentials" -H "Content-Type:application/x-www-form-urlencoded" https://localhost:9443/oauth2/token
 ```
 
-2. wso2 returns access_token
+2. wso2 returns access_token.
 
 #### Response
 ```
@@ -20,7 +20,7 @@ curl -v -X POST -H "Authorization: Basic <base64 encoded client id:client secret
 
 ```
 
-3. POST request to Minio with the access_token
+3. POST request to Minio with the access_token.
 
 #### Request
 ```
@@ -34,7 +34,7 @@ POST
 curl -k -u <USERNAME>:<PASSWORD> -H 'Content-Type: application/x-www-form-urlencoded' -X POST --data 'token=<ACCESS_TOKEN>' https://localhost:9443/oauth2/introspect
 ```
 
-We can use credentials of any user with "/permission/admin/manage/identity/applicationmgt/view" permissions. For more information, refer to the documentation [here](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint)
+We can use credentials of any user with "/permission/admin/manage/identity/applicationmgt/view" permissions. For more information, refer to the documentation [here](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint).
 
 5. wso2 returns a response whether the token is valid or not.
 
