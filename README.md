@@ -34,7 +34,7 @@ POST --data 'token=<ACCESS_TOKEN>'
 curl -k -u <USERNAME>:<PASSWORD> -H 'Content-Type: application/x-www-form-urlencoded' -X POST --data 'token=<ACCESS_TOKEN>' https://localhost:9443/oauth2/introspect
 ```
 
-We can use <USERNAME>:<PASSWORD> of any user with "/permission/admin/manage/identity/applicationmgt/view" permissions. For more information, refer to the documentation [here](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint).
+We can use USERNAME:PASSWORD of any user with "/permission/admin/manage/identity/applicationmgt/view" permissions. For more information, refer to the documentation [here](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint).
 
 5. wso2 returns a response whether the token is valid or not.
 
