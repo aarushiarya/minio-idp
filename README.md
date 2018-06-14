@@ -45,7 +45,7 @@ We can use USERNAME:PASSWORD of any user with "/permission/admin/manage/identity
 
 6. If token is valid, Minio returns temporary credentials comprising of Access key, Secret key and Security token(STS). STS indicates when the temporary credentials expire.
 
-  Temporary credentials are stored as environment variables, until they expire.
+  Temporary credentials are stored as environment variables, until they expire. Custom validity time can be set for access    tokens by adding validity_period parameter in the request to wso2 for access_token.
   
 7. Client credentials grant in wso2 don't support refresh token. To rotate temporary credentials, Minio provides an API to request new access key, before the current access key expires. AWS uses a similar process documented [here](https://aws.amazon.com/blogs/security/how-to-rotate-access-keys-for-iam-users/).
 
