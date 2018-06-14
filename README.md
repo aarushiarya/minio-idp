@@ -43,6 +43,7 @@ We can use <USERNAME>:<PASSWORD> of any user with "/permission/admin/manage/iden
 {"exp":1464161608,"username":"admin@carbon.super","active":true,"token_type":"Bearer","client_id":"rgfKVdnMQnJSSr_pKFTxj3apiwYa","iat":1464158008}
 ```
 
-6. If token is valid, Minio returns temporary credentials comprising of Access key, Secret key and Session token(STS).
+6. If token is valid, Minio returns temporary credentials comprising of Access key, Secret key and Security token(STS). STS indicates when the temporary credentials expire.
+
   Temporary credentials are stored as environment variables, until they expire.
   
