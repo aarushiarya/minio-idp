@@ -47,5 +47,5 @@ We can use USERNAME:PASSWORD of any user with "/permission/admin/manage/identity
 
   Temporary credentials are stored as environment variables, until they expire.
   
-7. Client credentials grant in wso2 don't support refresh token. To rotate temporary credentials, Minio provides an API to request new access key, before the current access key expires. AWS uses a similar process documented [here](https://aws.amazon.com/blogs/security/how-to-rotate-access-keys-for-iam-users/)
+7. Client credentials grant in wso2 don't support refresh token. To rotate temporary credentials, Minio provides an API to request new access key, before the current access key expires. AWS uses a similar process documented [here](https://aws.amazon.com/blogs/security/how-to-rotate-access-keys-for-iam-users/).
 
