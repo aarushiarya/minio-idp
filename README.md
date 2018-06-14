@@ -1,7 +1,7 @@
 # doctest
 # OpenID Connect Minio Deployment Guide
 
-To authenticate applications using OpenID Connect register your application with the Identity Provider(Keycloak), add host to minio server using access_token and Idp.
+To authenticate applications using OpenID Connect register your application with the Identity Provider(wso2), add host to minio server using access_token and Idp.
 
 ![image](https://user-images.githubusercontent.com/22103395/41384339-07613fd4-6f2a-11e8-8815-3593342275d8.png)
 
@@ -20,11 +20,11 @@ curl -v -X POST -H "Authorization: Basic <base64 encoded client id:client secret
 
 ```
 
-3. POST request to Minio with the access_token.
+3. Client request for temporary credentials by making a POST request to Minio with the access_token.
 
 #### Request
 ```
-POST 
+POST --data 'token=<ACCESS_TOKEN>'
 ```
 
 4. Minio verify access_token by making a POST request to OAuth Introspection Endpoint using username and password.
@@ -34,7 +34,7 @@ POST
 curl -k -u <USERNAME>:<PASSWORD> -H 'Content-Type: application/x-www-form-urlencoded' -X POST --data 'token=<ACCESS_TOKEN>' https://localhost:9443/oauth2/introspect
 ```
 
-We can use credentials of any user with "/permission/admin/manage/identity/applicationmgt/view" permissions. For more information, refer to the documentation [here](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint).
+We can use <USERNAME>:<PASSWORD> of any user with "/permission/admin/manage/identity/applicationmgt/view" permissions. For more information, refer to the documentation [here](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint).
 
 5. wso2 returns a response whether the token is valid or not.
 
@@ -43,4 +43,6 @@ We can use credentials of any user with "/permission/admin/manage/identity/appli
 {"exp":1464161608,"username":"admin@carbon.super","active":true,"token_type":"Bearer","client_id":"rgfKVdnMQnJSSr_pKFTxj3apiwYa","iat":1464158008}
 ```
 
-6. If token is valid, Minio returns temporary credentials comprising of Access key, Secret key and STS token.
+6. If token is valid, Minio returns temporary credentials comprising of Access key, Secret key and Session token(STS).
+  Temporary credentials are stored as environment variables, until they expire.
+  
