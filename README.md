@@ -45,4 +45,15 @@ Response
 
 #### 6. If access_token is valid, Minio returns temporary credentials comprising of Access key, Secret key and Session token and expiry time.
 
-  
+
+## Configuring Identity Provider with Client Grants
+Client Credentials Grant is suitable for machine-to-machine authentication or for a client making requests to an API that does not require the user’s permission. To read more, go to the [documentation](https://docs.wso2.com/display/IS510/Client+Credentials+Grant).
+
+Configure Identity Provider wso2
+
+
+## Setting Identity Provider Information in Minio Server
+#### Changes in Minio
+
+
+## Example Code for Clients
