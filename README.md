@@ -1,5 +1,5 @@
 
-# OpenID Connect Minio Deployment Guide
+# Minio Identity Management Configuration Guide
 
 To authenticate applications using OpenID Connect register your application with the Identity Provider(wso2).
 
