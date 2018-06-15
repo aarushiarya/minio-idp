@@ -22,7 +22,7 @@ Response
 
 ```
 
-Client credentials grant in wso2 don't support refresh token. To rotate temporary credentials, Minio would provide an API to request new access key, before the current access key expires. AWS uses a similar process documented [here](https://aws.amazon.com/blogs/security/how-to-rotate-access-keys-for-iam-users/).
+Client credentials grant in wso2 don't support refresh token. If access_token expires, make request to wso2 to get new access_token and get new temporary credentials from minio.
 
 #### 3. Client request for temporary credentials by making AssumeRoleWithClientGrant request to Minio with the access_token.
 
