@@ -3,7 +3,7 @@
 
 To authenticate applications using OpenID Connect register your application with the Identity Provider(wso2), add host to minio server using access_token and Idp.
 
-![image](https://user-images.githubusercontent.com/22103395/41384339-07613fd4-6f2a-11e8-8815-3593342275d8.png)
+![image](https://user-images.githubusercontent.com/22103395/41444165-202415e2-6ff6-11e8-9fd5-b096e1bbe64b.png)
 
 1. Client request for access_token from wso2 by sending client id and client secret.
 
