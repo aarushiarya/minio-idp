@@ -1,7 +1,9 @@
-# doctest
+
 # OpenID Connect Minio Deployment Guide
 
 To authenticate applications using OpenID Connect register your application with the Identity Provider(wso2), add host to minio server using access_token and Idp.
+
+## How OpenID works?
 
 ![image](https://user-images.githubusercontent.com/22103395/41444165-202415e2-6ff6-11e8-9fd5-b096e1bbe64b.png)
 
