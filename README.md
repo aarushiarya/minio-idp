@@ -5,7 +5,7 @@ To authenticate applications using OpenID Connect register your application with
 
 ## How OpenID works?
 
-![image](https://user-images.githubusercontent.com/22103395/41444165-202415e2-6ff6-11e8-9fd5-b096e1bbe64b.png)
+![image](https://user-images.githubusercontent.com/22103395/41444342-662c7a42-6ff7-11e8-93aa-75bce207e6cd.png)
 
 1. Client request for access_token from wso2 by sending client id and client secret.
 
