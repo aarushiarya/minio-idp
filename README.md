@@ -24,7 +24,7 @@ Response
 
 Client credentials grant in wso2 don't support refresh token. If access_token expires, make request to wso2 to get new access_token and get new temporary credentials from minio.
 
-#### 3. Client request for temporary credentials by making AssumeRoleWithClientGrant request to Minio with the access_token.
+#### 3. Client request for temporary credentials by making POST request to Minio with the access_token.
 
 #### 4. Minio verify access_token by making a POST request to OAuth Introspection Endpoint using username and password.
 
