@@ -22,7 +22,7 @@ curl -v -X POST -H "Authorization: Basic <base64 encoded client id:client secret
 
 ```
 
-...Client credentials grant in wso2 don't support refresh token. If access_token expires, make request to wso2 to get new ...access_token and get new temporary credentials from minio.
+Client credentials grant in wso2 don't support refresh token. If access_token expires, make request to wso2 to get new access_token and get new temporary credentials from minio.
 
 ## 3. Client request for temporary credentials by making POST request to Minio with the access_token.
 
@@ -33,7 +33,7 @@ curl -v -X POST -H "Authorization: Basic <base64 encoded client id:client secret
 curl -k -u <USERNAME>:<PASSWORD> -H 'Content-Type: application/x-www-form-urlencoded' -X POST --data 'token=<ACCESS_TOKEN>' https://localhost:9443/oauth2/introspect
 ```
 
-...Here USERNAME can be of any user with "/permission/admin/manage/identity/applicationmgt/view" permissions. For more information, refer to the documentation [here](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint).
+Here USERNAME can be of any user with "/permission/admin/manage/identity/applicationmgt/view" permissions. For more information, refer to the documentation [here](https://docs.wso2.com/display/IS530/Invoke+the+OAuth+Introspection+Endpoint).
 
 ## 5. wso2 returns a response whether the token is valid or not. If valid, responds with the expiry time of access_token
 
