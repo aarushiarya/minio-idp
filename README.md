@@ -55,7 +55,26 @@ Client Credentials Grant is suitable for machine-to-machine authentication or fo
   - Add user to get access token. 
 
 ## Setting Identity Provider Information in Minio Server
-#### Changes in Minio
-
+#### Changes in Minio Server
+  - Minio server accepts access_token from the client.
+  - Verify if access_token is valid.
+  - If valid, give new temporary credentials to the client.
 
 ## Example Code for Clients
+  - Accept access_token
+  ```
+  func get_access_token(){
+  }
+  ```
+  
+  - Verify access_token
+  ```
+  func verify_access_token(){
+  }
+  ```
+  
+  - Issue new temporary credentials
+  ```
+  func get_new_cred(){
+  }
+  ```
