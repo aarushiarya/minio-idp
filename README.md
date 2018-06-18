@@ -46,13 +46,13 @@ Response
 
 
 ## Configuring Identity Provider with Client Grants
-*Client Credentials Grant is suitable for machine-to-machine authentication or for a client making requests to an API that does not require the user’s permission. To read more, go to the [documentation](https://docs.wso2.com/display/IS510/Client+Credentials+Grant).
+Client Credentials Grant is suitable for machine-to-machine authentication or for a client making requests to an API that does not require the user’s permission. To read more, go to the [documentation](https://docs.wso2.com/display/IS510/Client+Credentials+Grant).
 
 #### Configure Identity Provider wso2
-*1. Download and install [wso2](https://docs.wso2.com/display/IS530/Installation+Guide)
-*2. Register your application on the [management console](https://docs.wso2.com/display/IS530/Getting+Started+with+the+Management+Console)
-*3. Follow this [tutorial](https://docs.wso2.com/display/IS530/Setting+Up+the+Sample+Webapp) to setup your first application.
-*4. Add user to get access token. 
+1. Download and install [wso2](https://docs.wso2.com/display/IS530/Installation+Guide)
+2. Register your application on the [management console](https://docs.wso2.com/display/IS530/Getting+Started+with+the+Management+Console)
+3. Follow this [tutorial](https://docs.wso2.com/display/IS530/Setting+Up+the+Sample+Webapp) to setup your first application.
+4. Add user to get access token. 
 
 ## Setting Identity Provider Information in Minio Server
 #### Changes in Minio
