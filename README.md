@@ -1,7 +1,7 @@
 
 # Minio Identity Management Configuration Guide
 
-To authenticate applications using OpenID Connect register your application with the Identity Provider(wso2).
+To authenticate applications using OpenID Connect register your application with the Identity Provider(WSO2).
 
 ## Minio - WSO2 Flow
  
@@ -49,7 +49,7 @@ Here USERNAME can be of any user with "/permission/admin/manage/identity/applica
 Client Credentials Grant is suitable for machine-to-machine authentication or for a client making requests to an API that does not require the user’s permission. To read more, go to the [documentation](https://docs.wso2.com/display/IS510/Client+Credentials+Grant).
 
 #### Configure Identity Provider WSO2
-  - Download and install [wso2](https://docs.wso2.com/display/IS530/Installation+Guide)
+  - Download and install [WSO2](https://docs.wso2.com/display/IS530/Installation+Guide)
   - Register your application on the [management console](https://docs.wso2.com/display/IS530/Getting+Started+with+the+Management+Console)
   - Follow this [tutorial](https://docs.wso2.com/display/IS530/Setting+Up+the+Sample+Webapp) to setup your first application.
   - Add user to get access token. 
