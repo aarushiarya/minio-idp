@@ -94,7 +94,7 @@ func getMinioTempCredentials() (minioTempCredentials, error) {
         TokenURL:     "https://wso2-server:9443/oauth2/token",
     }
 
-    // Make an authorization request to wso2 access token endpoint
+    // Make an authentication request to wso2 access token endpoint
     token, err := oauthConf.Token(oauth2.NoContext)
     if err != nil {
         return cred, err
