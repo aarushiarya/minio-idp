@@ -87,21 +87,21 @@ type minioTempCredentials struct {
 func getMinioTempCredentials() (minioTempCredentials, error) {
     cred := credentials{}
 
-    // Create a variable with wso2 application details after registering application on wso2 IDP
+    // Create a variable with WSO2 application details after registering application on WSO2 
     oauthConf := &clientcredentials.Config{
         ClientID:     "<Application Client ID>",
         ClientSecret: "<Application Client Secret>",
         TokenURL:     "https://wso2-server:9443/oauth2/token",
     }
 
-    // Make an authentication request to wso2 access token endpoint
+    // Make a request to WSO2 access_token endpoint
     token, err := oauthConf.Token(oauth2.NoContext)
     if err != nil {
         return cred, err
     }
 
     postBody := fmt.Sprintf("{accessToken:%s}", token.AccessToken)
-    // Make a POST request to Minio server with access token obtained
+    // Make a POST request to Minio server with access_token obtained
     resp, err := http.Post("http://minio-server.com/minio/sts", "application/json", strings.NewReader(postBody))
     if err != nil {
         return cred, err
