@@ -70,7 +70,6 @@ Client Credentials Grant is suitable for machine-to-machine authentication or fo
 			ClientSecret: "9Aon6fkYoEBeGBawwg4fWbqpg6Aa",
 			TokenURL:     "https://localhost:9443/oauth2/token",
 			Scopes:       []string{"openid", "profile", "email", "offline_access"},
-			//EndpointParams: "",
 		}
 		// random string for oauth2 API calls to protect against CSRF
 		oauthStateString = "thisshouldberandom"
