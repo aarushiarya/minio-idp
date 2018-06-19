@@ -7,7 +7,7 @@ To authenticate applications using OpenID Connect register your application with
  
 ![image](https://user-images.githubusercontent.com/22103395/41444342-662c7a42-6ff7-11e8-93aa-75bce207e6cd.png)
 
-### 1. Client requests for access_token from WSO2 by sending client id and client secret.
+### 1. Client requests for access_token from WSO2 by sending client id and client secret using client credentials grant.
 
    - Request
 ```
