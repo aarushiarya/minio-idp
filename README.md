@@ -64,17 +64,91 @@ Client Credentials Grant is suitable for machine-to-machine authentication or fo
   - Accept access_token
   ```
   func get_access_token(){
+	var (
+		oauthConf = &clientcredentials.Config{
+			ClientID:     "fy2TvqkILON1nfsqL6zaLL6C0m4a",
+			ClientSecret: "9Aon6fkYoEBeGBawwg4fWbqpg6Aa",
+			TokenURL:     "https://localhost:9443/oauth2/token",
+			Scopes:       []string{"openid", "profile", "email", "offline_access"},
+			//EndpointParams: "",
+		}
+		// random string for oauth2 API calls to protect against CSRF
+		oauthStateString = "thisshouldberandom"
+	)
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+	token, err := oauthConf.Token(oauth2.NoContext)
+	if err != nil {
+		log.Fatalln("Error In Token Request")
+		return "", err
+	}
+	return token.AccessToken, nil
   }
   ```
   
   - Verify access_token
   ```
   func verify_access_token(){
+	minioTokenUrl := "https://localhost:9443"
+	resource := "/oauth2/introspect"
+	u, err := url.ParseRequestURI(minioTokenUrl)
+	if err != nil {
+		log.Fatalln(err)
+		return false, -1, err
+	}
+	u.Path = resource
+	urlStr := u.String()
+	data := url.Values{}
+	data.Add("token", accessToken)
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &http.Client{Transport: tr}
+	r, err := http.NewRequest("POST", urlStr, strings.NewReader(data.Encode()))
+	if err != nil {
+		log.Fatalln(err)
+		return false, -1, err
+	}
+
+	// fmt.Println("URL STR= ", urlStr)
+
+	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	r.Header.Add("Authorization", "Basic YWRtaW46YWRtaW4=")
+
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+
+	resp, err := client.Do(r)
+	if err != nil {
+		log.Fatalln(err)
+		return false, 0, err
+	}
+
+	defer resp.Body.Close()
+	// fmt.Printf("RESP BODY IS %s\n", resp.Body)
+	// fmt.Printf("RESP headers are %s\n", resp.Header)
+	// fmt.Println("RESP STATUS CODE is ", resp.StatusCode)
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+		return false, -1, err
+	}
+
+	var validator map[string]interface{}
+	json.Unmarshal(body, &validator)
+	//fmt.Println(string(body))
+	ok := validator["active"]
+	timeValid := validator["exp"].(float64) - validator["iat"].(float64)
+	return ok.(bool), timeValid, err
   }
   ```
   
   - Issue new temporary credentials
   ```
   func get_new_cred(){
+	c, err := auth.GetNewCredentials()
+	if err != nil {
+		fmt.Printf("err = %v\n", err)
+		os.Exit(-1)
+	}
   }
   ```
