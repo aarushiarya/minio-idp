@@ -65,93 +65,54 @@ Client Credentials Grant is suitable for machine-to-machine authentication or fo
   - If valid, give new temporary credentials to the client.
 
 ## Example Code for Clients
-  - Accept access_token
-  ```
-  
-  type credentials struct {
-	AccessKey string `json:"accessKey,omitempty"`
-	SecretKey string `json:"secretKey,omitempty"`
-	ExpTime   float64
-  }
+ ```
+ import (
+    "encoding/json"
+    "fmt"
+    "net/http"
+    "strings"
+    "time"
 
-  func get_access_token(){
-	// Create a variable with wso2 application details after registering application on wso2 IDP
-	// Import "golang.org/x/oauth2/clientcredentials"
-	var (
-		oauthConf = &clientcredentials.Config{
-			ClientID:     "<Application Client ID>",
-			ClientSecret: "<Application Client Secret>",
-			TokenURL:     "<wso2 token endpoint>", // Example: https://localhost:9443/oauth2/token"
-			Scopes:       []string{"openid", "profile", "email", "offline_access"},
-		}
-		// random string for oauth2 API calls to protect against CSRF
-		oauthStateString = "thisshouldberandom"
-	)
+    "golang.org/x/oauth2"
+    "golang.org/x/oauth2/clientcredentials"
+)
 
-	// enable if HTTPS connection is not secure
-	//http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-	//
+type minioTempCredentials struct {
+    AccessKey    string    `json:"accessKey"`
+    SecretKey    string    `json:"secretKey"`
+    SessionToken string    `json:"sessionToken"`
+    Expiration   time.Time `json:"expiration"`
+}
 
-	// Make an authorization request to wso2 access token endpoint 
-	accessToken, err := oauthConf.Token(oauth2.NoContext)
-	if err != nil {
-		log.Fatalln("Error In Token Request")
-		return "", err
-	}
-	
-	// Make a POST request to Minio server with access token obtained
-	minioTokenUrl := <Insert the URL> //Example "http://localhost:9000"
-	resource := "/minio/sts" //Endpoint within minio server
+func getMinioTempCredentials() (minioTempCredentials, error) {
+    cred := credentials{}
 
-	u, err := url.ParseRequestURI(minioTokenUrl)
-	if err != nil {
-		log.Fatalln(err)
-	}
+    // Create a variable with wso2 application details after registering application on wso2 IDP
+    oauthConf := &clientcredentials.Config{
+        ClientID:     "<Application Client ID>",
+        ClientSecret: "<Application Client Secret>",
+        TokenURL:     "https://wso2-server:9443/oauth2/token",
+    }
 
-	u.Path = resource
-	urlStr := u.String()
-	data := url.Values{}
-	data.Add("AccessToken", accessToken) //Access token is added to the body of the POST Request to Minio Server
+    // Make an authorization request to wso2 access token endpoint
+    token, err := oauthConf.Token(oauth2.NoContext)
+    if err != nil {
+        return cred, err
+    }
 
-	// Create an HTTP client to make post request
-	client := &http.Client{}
- 
-	r, err := http.NewRequest("POST", urlStr, strings.NewReader(data.Encode())) //bytes.NewBufferString(data.Encode())
-	if err != nil {
-		//return nil, err
-		log.Fatalln(err)
-	}
-	
-	//Add headers to POST request
-	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	
-	//Execute POST request 
-	resp, err := client.Do(r)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	
-	//Capture response in Body
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		//return nil, err
-		log.Fatalln(err)
-	}
-	
-	// Minio Server will return Minio Secret Key, Minio Access Key, Expiration time of validated Access Token  
-	cred := credentials{}	
-	json.Unmarshal(body, cred)
-	defer resp.Body.Close()
-	return cred, nil
-  }
-  ```
-  
-  - Issue new temporary credentials
-  ```
-  func get_new_cred(){
-	c, err := auth.GetNewCredentials()
-	if err != nil {
-		log.Fatalln(err)
-	}
-  }
-  ```
+    postBody := fmt.Sprintf("{accessToken:%s}", token.AccessToken)
+    // Make a POST request to Minio server with access token obtained
+    resp, err := http.Post("http://minio-server.com/minio/sts", "application/json", strings.NewReader(postBody))
+    if err != nil {
+        return cred, err
+    }
+    defer resp.Body.Close()
+
+    // Minio Server will return Minio Secret Key, Minio Access Key, Expiration time of validated Access Token
+    err = json.NewDecoder(resp.Body).Decode(&cred)
+    if err != nil {
+        return cred, err
+    }
+    return cred, nil
+}
+```
