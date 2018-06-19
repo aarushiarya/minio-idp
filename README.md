@@ -5,7 +5,7 @@ To authenticate applications using OpenID Connect register your application with
 
 ## Minio - WSO2 Flow
  
-![image](https://user-images.githubusercontent.com/22103395/41444342-662c7a42-6ff7-11e8-93aa-75bce207e6cd.png)
+![image](https://user-images.githubusercontent.com/22103395/41629299-93d3abac-73dd-11e8-9c88-948db2cc51e7.png)
 
 ### 1. Client requests for access_token from WSO2 by sending client id and client secret using client credentials grant.
 
