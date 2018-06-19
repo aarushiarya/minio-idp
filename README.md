@@ -27,7 +27,7 @@ Client credentials grant in WSO2 don't support refresh token. If access_token ex
 ### 3. Client request for temporary credentials by making POST request to Minio with the access_token.
 - Proposed Request
 ```
-curl -v -X POST -H "flow:client_credentials" -k -d "token=<ACCESS_TOKEN>" -H "Content-Type:application/x-www-form-urlencoded" https://localhost:9443/oauth2/token
+curl -v -X POST -H "flow:client_credentials" -k -d "token=<ACCESS_TOKEN>" -H "Content-Type:application/x-www-form-urlencoded" https://localhost:9000/minio/sts
 ```
 
 ### 4. Minio verify access_token by making a POST request to OAuth Introspection Endpoint using username and password.
