@@ -63,82 +63,82 @@ Client Credentials Grant is suitable for machine-to-machine authentication or fo
 ## Example Code for Clients
   - Accept access_token
   ```
+  
+  type credentials struct {
+	AccessKey string `json:"accessKey,omitempty"`
+	SecretKey string `json:"secretKey,omitempty"`
+	ExpTime   float64
+  }
+
   func get_access_token(){
+	// Create a variable with wso2 application details after registering application on wso2 IDP
+	// Import "golang.org/x/oauth2/clientcredentials"
 	var (
 		oauthConf = &clientcredentials.Config{
-			ClientID:     "fy2TvqkILON1nfsqL6zaLL6C0m4a",
-			ClientSecret: "9Aon6fkYoEBeGBawwg4fWbqpg6Aa",
-			TokenURL:     "https://localhost:9443/oauth2/token",
+			ClientID:     "<Application Client ID>",
+			ClientSecret: "<Application Client Secret>",
+			TokenURL:     "<wso2 token endpoint>", // Example: https://localhost:9443/oauth2/token"
 			Scopes:       []string{"openid", "profile", "email", "offline_access"},
-			//EndpointParams: "",
 		}
 		// random string for oauth2 API calls to protect against CSRF
 		oauthStateString = "thisshouldberandom"
 	)
-	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-	token, err := oauthConf.Token(oauth2.NoContext)
+
+	// enable if HTTPS connection is not secure
+	//http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+	//
+
+	// Make an authorization request to wso2 access token endpoint 
+	accessToken, err := oauthConf.Token(oauth2.NoContext)
 	if err != nil {
 		log.Fatalln("Error In Token Request")
 		return "", err
 	}
-	return token.AccessToken, nil
-  }
-  ```
-  
-  - Verify access_token
-  ```
-  func verify_access_token(){
-	minioTokenUrl := "https://localhost:9443"
-	resource := "/oauth2/introspect"
+	
+	// Make a POST request to Minio server with access token obtained
+	minioTokenUrl := <Insert the URL> //Example "http://localhost:9000"
+	resource := "/minio/sts" //Endpoint within minio server
+
 	u, err := url.ParseRequestURI(minioTokenUrl)
 	if err != nil {
 		log.Fatalln(err)
-		return false, -1, err
 	}
+
 	u.Path = resource
 	urlStr := u.String()
 	data := url.Values{}
-	data.Add("token", accessToken)
-	tr := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-	}
-	client := &http.Client{Transport: tr}
-	r, err := http.NewRequest("POST", urlStr, strings.NewReader(data.Encode()))
+	data.Add("AccessToken", accessToken) //Access token is added to the body of the POST Request to Minio Server
+
+	// Create an HTTP client to make post request
+	client := &http.Client{}
+ 
+	r, err := http.NewRequest("POST", urlStr, strings.NewReader(data.Encode())) //bytes.NewBufferString(data.Encode())
 	if err != nil {
+		//return nil, err
 		log.Fatalln(err)
-		return false, -1, err
 	}
-
-	// fmt.Println("URL STR= ", urlStr)
-
+	
+	//Add headers to POST request
 	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	r.Header.Add("Authorization", "Basic YWRtaW46YWRtaW4=")
-
-	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-
+	
+	//Execute POST request 
 	resp, err := client.Do(r)
 	if err != nil {
 		log.Fatalln(err)
-		return false, 0, err
 	}
-
-	defer resp.Body.Close()
-	// fmt.Printf("RESP BODY IS %s\n", resp.Body)
-	// fmt.Printf("RESP headers are %s\n", resp.Header)
-	// fmt.Println("RESP STATUS CODE is ", resp.StatusCode)
-
+	
+	//Capture response in Body
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		//return nil, err
 		log.Fatalln(err)
-		return false, -1, err
 	}
-
-	var validator map[string]interface{}
-	json.Unmarshal(body, &validator)
-	//fmt.Println(string(body))
-	ok := validator["active"]
-	timeValid := validator["exp"].(float64) - validator["iat"].(float64)
-	return ok.(bool), timeValid, err
+	
+	// Minio Server will return Minio Secret Key, Minio Access Key, Expiration time of validated Access Token  
+	cred := credentials{}	
+	json.Unmarshal(body, cred)
+	defer resp.Body.Close()
+	return cred, nil
   }
   ```
   
@@ -147,8 +147,7 @@ Client Credentials Grant is suitable for machine-to-machine authentication or fo
   func get_new_cred(){
 	c, err := auth.GetNewCredentials()
 	if err != nil {
-		fmt.Printf("err = %v\n", err)
-		os.Exit(-1)
+		log.Fatalln(err)
 	}
   }
   ```
