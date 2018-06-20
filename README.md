@@ -46,7 +46,7 @@ Here USERNAME can be of any user with "/permission/admin/manage/identity/applica
 {"exp":1464161608,"username":"admin@carbon.super","active":true,"token_type":"Bearer","client_id":"rgfKVdnMQnJSSr_pKFTxj3apiwYa","iat":1464158008}
 ```
 
-### 6. If access_token is valid, Minio returns temporary credentials comprising of Access key, Secret key and Session token and expiry time.
+### 6. If access_token is valid, Minio returns temporary credentials comprising of Access key, Secret key and Session token and expiry time over tls.
 
 
 ## Configuring Identity Provider with Client Grants
