@@ -102,7 +102,7 @@ func getMinioTempCredentials() (minioTempCredentials, error) {
 
     postBody := fmt.Sprintf("{accessToken:%s}", token.AccessToken)
     // Make a POST request to Minio server with access_token obtained
-    resp, err := http.Post("http://minio-server.com/minio/sts", "application/json", strings.NewReader(postBody))
+    resp, err := http.Post("https://minio-server.com/minio/sts", "application/json", strings.NewReader(postBody))
     if err != nil {
         return cred, err
     }
